@@ -178,7 +178,7 @@
     .then((data) => {
       const local = Array.isArray(data.photos) ? data.photos.filter((name) =>
         typeof name === 'string' && /^sample-photos\/[^\/\\?#]+\.(jpg|jpeg|png|webp)$/i.test(name)
-      ).slice(0,10).map((name) => ({ image: './' + encodeURI(name), url: './' + encodeURI(name), local: true })) : [];
+      ).slice(0,20).map((name) => ({ image: './' + encodeURI(name), url: './' + encodeURI(name), local: true })) : [];
       if (local.length) return local;
       return loadJson('./instagram-posts.json').then((data) => Array.isArray(data.posts)
         ? data.posts.filter((p) => p && allowedImage(p.image) && allowedPost(p.url)).slice(0,5)
