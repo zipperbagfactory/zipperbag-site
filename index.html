@@ -31,7 +31,7 @@
 .visual.ig-ready{display:block;padding:0;border:1px solid var(--line);background:#e9e9e3}
 .ig-slider{height:390px;position:relative;overflow:hidden}
 .ig-open{display:block;width:100%;height:100%;background:#e9e9e3}
-.ig-photo{display:block;width:100%;height:100%;object-fit:contain}
+.ig-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .ig-source{position:absolute;left:16px;top:16px;z-index:1;padding:6px 10px;background:rgba(23,25,23,.87);color:#fff;font-size:10px;font-weight:900;letter-spacing:1px;pointer-events:none}
 .ig-nav{position:absolute;bottom:16px;left:16px;right:16px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none}
 .ig-dots{display:flex;gap:6px;align-items:center;pointer-events:auto}
@@ -251,11 +251,10 @@
         photo.removeAttribute('src');
         photo.alt = '이미지를 표시할 수 없습니다. 인스타그램에서 확인해 주세요.';
       });
-      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const start = () => {
         clearInterval(timer);
         if (document.hidden) return;
-        if (!reducedMotion && photos.length > 1) {
+        if (photos.length > 1) {
           timer = setInterval(() => show(current + 1), 1000);
         }
       };
@@ -263,10 +262,6 @@
       const restart = () => { stop(); start(); };
       previous.addEventListener('click', () => { show(current - 1); restart(); });
       next.addEventListener('click', () => { show(current + 1); restart(); });
-      slider.addEventListener('mouseenter', stop);
-      slider.addEventListener('mouseleave', start);
-      slider.addEventListener('focusin', stop);
-      slider.addEventListener('focusout', start);
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) stop();
         else restart();
