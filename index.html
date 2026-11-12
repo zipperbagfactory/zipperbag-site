@@ -255,7 +255,7 @@
         clearInterval(timer);
         if (document.hidden) return;
         if (photos.length > 1) {
-          timer = setInterval(() => show(current + 1), 1000);
+          timer = setInterval(() => show(current + 1), 2000);
         }
       };
       const stop = () => clearInterval(timer);
