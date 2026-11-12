@@ -1,0 +1,43 @@
+name: Refresh sample photo folder
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'sample-photos/*.jpg'
+      - 'sample-photos/*.jpeg'
+      - 'sample-photos/*.png'
+      - 'sample-photos/*.webp'
+      - 'sample-photos/*.JPG'
+      - 'sample-photos/*.JPEG'
+      - 'sample-photos/*.PNG'
+      - 'sample-photos/*.WEBP'
+      - 'scripts/index_sample_photos.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sample-photos-index
+  cancel-in-progress: false
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update sample photo list
+        run: python3 scripts/index_sample_photos.py
+      - name: Commit list only when needed
+        shell: bash
+        run: |
+          if git diff --quiet -- sample-photos/photos.json; then
+            echo "No list changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sample-photos/photos.json
+          git commit -m "Auto-refresh sample photo folder list"
+          git pull --rebase
+          git push
