@@ -256,7 +256,7 @@
         clearInterval(timer);
         if (document.hidden) return;
         if (!reducedMotion && photos.length > 1) {
-          timer = setInterval(() => show(current + 1), 4500);
+          timer = setInterval(() => show(current + 1), 1000);
         }
       };
       const stop = () => clearInterval(timer);
