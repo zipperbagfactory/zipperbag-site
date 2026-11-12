@@ -170,18 +170,24 @@
     try { return new URL(value).protocol === 'https:'; }
     catch { return false; }
   };
-  fetch('./instagram-posts.json', { cache: 'no-store' })
-    .then((response) => {
-      if (!response.ok) throw new Error('Photos not ready');
-      return response.json();
-    })
+  const loadJson = (file) => fetch(file, { cache: 'no-store' }).then((response) => {
+    if (!response.ok) throw new Error('Photo list not ready');
+    return response.json();
+  });
+  loadJson('./sample-photos/photos.json')
     .then((data) => {
-      const photos = Array.isArray(data.posts)
+      const local = Array.isArray(data.photos) ? data.photos.filter((name) =>
+        typeof name === 'string' && /^sample-photos\\/[a-zA-Z0-9_-]+\\.(jpg|jpeg|png|webp)$/i.test(name)
+      ).slice(0,10).map((name) => ({ image: './' + name, url: './' + name, local: true })) : [];
+      if (local.length) return local;
+      return loadJson('./instagram-posts.json').then((data) => Array.isArray(data.posts)
         ? data.posts.filter((p) => p && allowedImage(p.image) && allowedPost(p.url)).slice(0,5)
-        : [];
-      if (!photos.length) return; // Keep the existing placeholder until authorized.
+        : []);
+    })
+    .then((photos) => {
+      if (!photos.length) return; // Show the placeholder before photos are uploaded.
       visual.classList.add('ig-ready');
-      visual.setAttribute('aria-label', '인스타그램에서 공개한 지퍼백 샘플 사진');
+      visual.setAttribute('aria-label', '지퍼백 제작 샘플 사진');
       visual.replaceChildren();
 
       const slider = document.createElement('div');
@@ -190,7 +196,7 @@
       link.className = 'ig-open';
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', '인스타그램 샘플 게시물 보기');
+      link.setAttribute('aria-label', '샘플 사진 자세히 보기');
       const photo = document.createElement('img');
       photo.className = 'ig-photo';
       photo.alt = '인스타그램에 게시한 지퍼백 샘플 사진';
@@ -198,7 +204,7 @@
       link.append(photo);
       const label = document.createElement('div');
       label.className = 'ig-source';
-      label.textContent = 'INSTAGRAM · SAMPLE PHOTOS';
+      label.textContent = photos[0].local ? 'ZIPPERBAG · SAMPLE PHOTOS' : 'INSTAGRAM · SAMPLE PHOTOS';
       slider.append(link, label);
 
       const nav = document.createElement('div');
@@ -238,7 +244,7 @@
         current = (index + photos.length) % photos.length;
         photo.src = photos[current].image;
         link.href = photos[current].url;
-        photo.alt = '인스타그램 지퍼백 샘플 사진 ' + (current + 1);
+        photo.alt = '지퍼백 샘플 사진 ' + (current + 1);
         dotButtons.forEach((dot,i) => dot.setAttribute('aria-current',String(i===current)));
       };
       photo.addEventListener('error', () => {
