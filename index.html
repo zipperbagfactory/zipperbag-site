@@ -247,6 +247,8 @@
       });
       const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const start = () => {
+        clearInterval(timer);
+        if (document.hidden) return;
         if (!reducedMotion && photos.length > 1) {
           timer = setInterval(() => show(current + 1), 4500);
         }
