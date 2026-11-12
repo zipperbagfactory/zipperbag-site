@@ -26,7 +26,22 @@
 .blog-all{display:inline-flex;align-items:center;margin-top:23px;padding-bottom:5px;border-bottom:1px solid var(--ink);font-size:13px;font-weight:800}
 .blog-empty{grid-column:1/-1;border:1px solid var(--line);background:#fff;padding:28px;color:var(--muted);font-size:14px}
 
-@media(max-width:760px){.blog-posts{grid-template-columns:1fr}.blog-cover{height:150px}.wrap{width:min(100% - 28px,560px)}.nav{padding:17px 0}.navlinks{gap:12px;font-size:11px}.navlinks a:nth-child(2){display:none}.hero{grid-template-columns:1fr;padding:52px 0 34px;gap:28px}.hero h1{letter-spacing:-2px}.visual{min-height:320px}.bag{height:225px}.section{padding:55px 0}.section-head{display:block}.section-head p{margin-top:14px;white-space:normal}.cards{grid-template-columns:1fr}.card{min-height:0}.card h3{margin-top:15px}.steps{grid-template-columns:1fr 1fr;row-gap:25px}.faq{grid-template-columns:1fr;gap:10px}.contactgrid{grid-template-columns:1fr;gap:22px}.strip .wrap{justify-content:flex-start}}
+
+/* Instagram sample photo slideshow; inactive until authorized photos exist */
+.visual.ig-ready{display:block;padding:0;border:1px solid var(--line);background:#e9e9e3}
+.ig-slider{height:390px;position:relative;overflow:hidden}
+.ig-open{display:block;width:100%;height:100%;background:#e9e9e3}
+.ig-photo{display:block;width:100%;height:100%;object-fit:contain}
+.ig-source{position:absolute;left:16px;top:16px;z-index:1;padding:6px 10px;background:rgba(23,25,23,.87);color:#fff;font-size:10px;font-weight:900;letter-spacing:1px;pointer-events:none}
+.ig-nav{position:absolute;bottom:16px;left:16px;right:16px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none}
+.ig-dots{display:flex;gap:6px;align-items:center;pointer-events:auto}
+.ig-dot{border:0;border-radius:50%;width:8px;height:8px;padding:0;background:rgba(23,25,23,.3);cursor:pointer}
+.ig-dot[aria-current="true"]{background:#171917}
+.ig-buttons{display:flex;gap:7px;pointer-events:auto}
+.ig-arrow{display:grid;place-items:center;cursor:pointer;width:36px;height:36px;border:1px solid rgba(23,25,23,.13);background:rgba(255,255,255,.93);color:var(--ink);font-size:22px;line-height:1}
+.ig-arrow:hover{background:var(--lime)}
+
+@media(max-width:760px){.ig-slider{height:320px}.blog-posts{grid-template-columns:1fr}.blog-cover{height:150px}.wrap{width:min(100% - 28px,560px)}.nav{padding:17px 0}.navlinks{gap:12px;font-size:11px}.navlinks a:nth-child(2){display:none}.hero{grid-template-columns:1fr;padding:52px 0 34px;gap:28px}.hero h1{letter-spacing:-2px}.visual{min-height:320px}.bag{height:225px}.section{padding:55px 0}.section-head{display:block}.section-head p{margin-top:14px;white-space:normal}.cards{grid-template-columns:1fr}.card{min-height:0}.card h3{margin-top:15px}.steps{grid-template-columns:1fr 1fr;row-gap:25px}.faq{grid-template-columns:1fr;gap:10px}.contactgrid{grid-template-columns:1fr;gap:22px}.strip .wrap{justify-content:flex-start}}
 </style>
 </head>
 <body>
@@ -138,6 +153,121 @@
       });
     })
     .catch(() => message('블로그 글을 불러오지 못했습니다. 아래 링크에서 네이버 블로그를 확인해 주세요.'));
+})();
+</script>
+
+<script>
+(() => {
+  const visual = document.querySelector('.hero .visual');
+  if (!visual) return;
+  const allowedPost = (value) => {
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' && ['instagram.com', 'www.instagram.com'].includes(url.hostname);
+    } catch { return false; }
+  };
+  const allowedImage = (value) => {
+    try { return new URL(value).protocol === 'https:'; }
+    catch { return false; }
+  };
+  fetch('./instagram-posts.json', { cache: 'no-store' })
+    .then((response) => {
+      if (!response.ok) throw new Error('Photos not ready');
+      return response.json();
+    })
+    .then((data) => {
+      const photos = Array.isArray(data.posts)
+        ? data.posts.filter((p) => p && allowedImage(p.image) && allowedPost(p.url)).slice(0,5)
+        : [];
+      if (!photos.length) return; // Keep the existing placeholder until authorized.
+      visual.classList.add('ig-ready');
+      visual.setAttribute('aria-label', '인스타그램에서 공개한 지퍼백 샘플 사진');
+      visual.replaceChildren();
+
+      const slider = document.createElement('div');
+      slider.className = 'ig-slider';
+      const link = document.createElement('a');
+      link.className = 'ig-open';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', '인스타그램 샘플 게시물 보기');
+      const photo = document.createElement('img');
+      photo.className = 'ig-photo';
+      photo.alt = '인스타그램에 게시한 지퍼백 샘플 사진';
+      photo.decoding = 'async';
+      link.append(photo);
+      const label = document.createElement('div');
+      label.className = 'ig-source';
+      label.textContent = 'INSTAGRAM · SAMPLE PHOTOS';
+      slider.append(link, label);
+
+      const nav = document.createElement('div');
+      nav.className = 'ig-nav';
+      const dots = document.createElement('div');
+      dots.className = 'ig-dots';
+      dots.setAttribute('aria-label', '샘플 사진 선택');
+      const buttons = document.createElement('div');
+      buttons.className = 'ig-buttons';
+      const previous = document.createElement('button');
+      previous.type = 'button';
+      previous.className = 'ig-arrow';
+      previous.textContent = '‹';
+      previous.setAttribute('aria-label', '이전 샘플 사진');
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'ig-arrow';
+      next.textContent = '›';
+      next.setAttribute('aria-label', '다음 샘플 사진');
+      buttons.append(previous,next);
+      nav.append(dots,buttons);
+      slider.append(nav);
+      visual.append(slider);
+
+      let current = 0;
+      let timer;
+      const dotButtons = photos.map((_, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'ig-dot';
+        dot.setAttribute('aria-label', (index + 1) + '번째 샘플 사진');
+        dot.addEventListener('click', () => { show(index); restart(); });
+        dots.append(dot);
+        return dot;
+      });
+      const show = (index) => {
+        current = (index + photos.length) % photos.length;
+        photo.src = photos[current].image;
+        link.href = photos[current].url;
+        photo.alt = '인스타그램 지퍼백 샘플 사진 ' + (current + 1);
+        dotButtons.forEach((dot,i) => dot.setAttribute('aria-current',String(i===current)));
+      };
+      photo.addEventListener('error', () => {
+        photo.removeAttribute('src');
+        photo.alt = '이미지를 표시할 수 없습니다. 인스타그램에서 확인해 주세요.';
+      });
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const start = () => {
+        if (!reducedMotion && photos.length > 1) {
+          timer = setInterval(() => show(current + 1), 4500);
+        }
+      };
+      const stop = () => clearInterval(timer);
+      const restart = () => { stop(); start(); };
+      previous.addEventListener('click', () => { show(current - 1); restart(); });
+      next.addEventListener('click', () => { show(current + 1); restart(); });
+      slider.addEventListener('mouseenter', stop);
+      slider.addEventListener('mouseleave', start);
+      slider.addEventListener('focusin', stop);
+      slider.addEventListener('focusout', start);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else restart();
+      });
+      if (photos.length === 1) nav.remove();
+      show(0);
+      start();
+    })
+    .catch(() => { /* Preserve the original placeholder when data is unavailable. */ });
 })();
 </script>
 </body></html>
