@@ -2,6 +2,7 @@
 """Sync recent public Naver blog RSS entries to a small website JSON file."""
 from __future__ import annotations
 
+import base64
 import json
 import re
 from datetime import timezone
@@ -56,6 +57,48 @@ def valid_image(url: str) -> bool:
         return u.scheme == "https" and (u.hostname or "").lower() in IMAGE_HOSTS
     except ValueError:
         return False
+
+
+MAX_IMAGE_BYTES = 240_000
+
+
+def image_mime(data: bytes) -> str:
+    if data.startswith(b"\xff\xd8\xff"):
+        return "jpeg"
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if data.startswith((b"GIF87a", b"GIF89a")):
+        return "gif"
+    if data.startswith(b"RIFF") and data[8:12] == b"WEBP":
+        return "webp"
+    return ""
+
+
+def cache_thumbnail(post: dict, previous: dict) -> None:
+    url = post.get("image", "")
+    if not valid_image(url):
+        return
+    cached = previous.get("cachedImage", "")
+    if previous.get("image") == url and isinstance(cached, str) and cached.startswith("data:image/"):
+        post["cachedImage"] = cached
+        return
+    try:
+        request = Request(url, headers={
+            "User-Agent": "Mozilla/5.0",
+            "Accept": "image/jpeg,image/png,image/webp,image/gif,*/*;q=0.5",
+            "Referer": "https://blog.naver.com/",
+        })
+        with urlopen(request, timeout=12) as response:
+            if not valid_image(response.geturl()):
+                raise ValueError("Unexpected image host")
+            data = response.read(MAX_IMAGE_BYTES + 1)
+        mime = image_mime(data)
+        if not mime or len(data) > MAX_IMAGE_BYTES:
+            raise ValueError("Unsupported or oversized thumbnail")
+        post["cachedImage"] = f"data:image/{mime};base64," + base64.b64encode(data).decode("ascii")
+        print("Cached blog thumbnail.")
+    except Exception as exc:
+        print(f"Thumbnail cache unavailable ({type(exc).__name__}); retaining original image URL.")
 
 
 def text_of(node, name: str) -> str:
@@ -128,6 +171,10 @@ def main():
             old = json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
         except (ValueError, OSError):
             pass
+    previous_posts = (old or {}).get("posts", [])
+    previous_by_url = {p.get("url"): p for p in previous_posts if isinstance(p, dict)}
+    for post in posts:
+        cache_thumbnail(post, previous_by_url.get(post["url"], {}))
     if old == payload:
         print("Blog posts unchanged.")
         return
