@@ -173,10 +173,15 @@ body{overflow-wrap:break-word}
             const allowed = ['postfiles.pstatic.net','blogfiles.pstatic.net','blogthumb.pstatic.net','mblogthumb-phinf.pstatic.net','phinf.pstatic.net','blogpfthumb-phinf.pstatic.net'];
             if (imageUrl.protocol === 'https:' && allowed.includes(imageUrl.hostname)) {
               const img = document.createElement('img');
-              img.src = imageUrl.href;
               img.loading = 'lazy';
               img.alt = '';
-              img.addEventListener('error', () => img.remove());
+              const cached = typeof post.cachedImage === 'string' && /^data:image\/(?:jpeg|png|gif|webp);base64,[A-Za-z0-9+/=]+$/.test(post.cachedImage)
+                ? post.cachedImage : '';
+              img.addEventListener('error', () => {
+                if (cached && img.src === cached) img.src = imageUrl.href;
+                else img.remove();
+              });
+              img.src = cached || imageUrl.href;
               cover.append(img);
             }
           } catch {}
