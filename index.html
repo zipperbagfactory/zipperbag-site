@@ -211,6 +211,19 @@ main>.hero.wrap .ig-dot:focus-visible{outline:2px solid #086d9a}
  .blog-section{padding-top:44px}
 }
 
+
+/* Desktop-only illustrated production slider; mobile sample slider remains unchanged. */
+.pc-hero-slide,.pc-hero-controls,.pc-hero-ai{display:none}
+@media(min-width:761px){
+ main>.hero.wrap .visual{display:none}
+ main>.hero.wrap .pc-hero-slide{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;z-index:0}
+ main>.hero.wrap .pc-hero-ai{display:block;position:absolute;z-index:3;right:16px;bottom:12px;background:#ffffffc9;border-radius:4px;color:#44515b;padding:2px 7px;font-size:11px}
+ main>.hero.wrap .pc-hero-controls{display:flex;position:absolute;z-index:4;left:50%;bottom:17px;transform:translateX(-50%);align-items:center;gap:9px}
+ .pc-hero-arrow{border:0;width:33px;height:33px;border-radius:50%;background:#ffffffdf;color:#25485e;font-size:18px;cursor:pointer}
+ .pc-hero-dot{width:9px;height:9px;border-radius:50%;border:0;background:#6e8396;cursor:pointer;padding:0}
+ .pc-hero-dot[aria-current="true"]{background:#168cc8}
+ .pc-hero-controls button:focus-visible{outline:2px solid #086d9a;outline-offset:3px}
+}
 </style>
 <meta name="google-site-verification" content="JAUnOoTRpaMYYaCgUPmKnvIZRqEFL4G1hkqJhHRhaAw" />
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
@@ -218,7 +231,7 @@ main>.hero.wrap .ig-dot:focus-visible{outline:2px solid #086d9a}
 <body>
 <header class="wrap nav"><a class="brand" href="#top">청년지퍼백공장<small>APPAREL PACKAGING PARTNER</small></a><button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="메뉴 열기"><span></span><span></span><span></span></button><nav class="navlinks" id="site-menu"><a href="#product">핵심제품</a><a href="#portfolio">제작 포트폴리오</a><a href="#journal">제작저널</a><a href="#process">제작 안내</a><a class="nav-quote" href="#contact">제작 견적 문의 ↗</a></nav></header>
 <main id="top">
-<section class="wrap hero"><div><div class="eyebrow">Z I P P E R B A G _ F A C T O R Y</div><h1>청년지퍼백공장</h1><p>국내외 브랜드 지퍼폴리백 제작 파트너</p><div class="actions"><a class="btn dark" href="#contact">제작 견적 문의 ↗</a><a class="btn" href="https://www.instagram.com/zipperbag.official/" target="_blank" rel="noopener noreferrer">제품 샘플보기</a></div></div><div class="visual" aria-label="제품 사진 추후 추가 영역"><div class="photo-placeholder"><strong>PRODUCT PHOTOS</strong><span>제품 사진과 인쇄 제작 사례를<br>추후 이 영역에 추가할 예정입니다.</span></div><div class="visual-note">IMAGE AREA · 사진 추후 추가</div></div></section>
+<section class="wrap hero"><div><div class="eyebrow">Z I P P E R B A G _ F A C T O R Y</div><h1>청년지퍼백공장</h1><p>국내외 브랜드 지퍼폴리백 제작 파트너</p><div class="actions"><a class="btn dark" href="#contact">제작 견적 문의 ↗</a><a class="btn" href="https://www.instagram.com/zipperbag.official/" target="_blank" rel="noopener noreferrer">제품 샘플보기</a></div></div><div class="visual" aria-label="제품 사진 추후 추가 영역"><div class="photo-placeholder"><strong>PRODUCT PHOTOS</strong><span>제품 사진과 인쇄 제작 사례를<br>추후 이 영역에 추가할 예정입니다.</span></div><div class="visual-note">IMAGE AREA · 사진 추후 추가</div></div><img class="pc-hero-slide" alt="AI로 재구성한 생산시설 이미지" decoding="async"><div class="pc-hero-controls" aria-label="생산시설 이미지 선택"><button type="button" class="pc-hero-arrow" data-step="-1" aria-label="이전 이미지">‹</button><button type="button" class="pc-hero-dot" data-slide="0" aria-current="true" aria-label="공장 내부"></button><button type="button" class="pc-hero-dot" data-slide="1" aria-current="false" aria-label="원단 롤"></button><button type="button" class="pc-hero-arrow" data-step="1" aria-label="다음 이미지">›</button></div><div class="pc-hero-ai">AI로 재구성한 이미지</div></section>
 <div class="strip"><div class="wrap"><span>DESIGNER BRANDS</span><span>DOMESTIC BRANDS</span><span>HIGH-END BRANDS</span><span>GOVERNMENT AGENCIES</span></div></div>
 <section class="wrap section product-section" id="product"><div class="section-head"><div><div class="eyebrow">OUR PRODUCTS</div><h2>핵심제품</h2></div></div><div class="industry-grid">
 <a class="industry-card" href="./fashion.html"><div class="industry-visual industry-fashion"><svg class="industry-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6a3 3 0 0 1 6 0c0 1.7-3 2.1-3 4"/><path d="m12 10 9 7.5a1.7 1.7 0 0 1-1.1 3H4.1a1.7 1.7 0 0 1-1.1-3L12 10Z"/></svg></div><div class="industry-caption"><span><strong>패션업계</strong><small>의류 브랜드 및 온라인 쇼핑몰</small></span><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div></a>
@@ -479,6 +492,35 @@ main>.hero.wrap .ig-dot:focus-visible{outline:2px solid #086d9a}
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', '메뉴 열기');
   }));
+})();
+</script>
+<script>
+(() => {
+  const image = document.querySelector('.pc-hero-slide');
+  const controls = document.querySelector('.pc-hero-controls');
+  if (!image || !controls) return;
+  const desktop = window.matchMedia('(min-width: 761px)');
+  const photos = ['./hero-images/factory.png','./hero-images/rolls.png'];
+  let current=0, timer=null, preloaded=false;
+  const show = (n) => {
+    current=(n+photos.length)%photos.length;
+    image.src=photos[current];
+    image.alt=current===0?'AI로 재구성한 지퍼폴리백 생산시설 이미지':'AI로 재구성한 지퍼폴리백 원단 롤 이미지';
+    controls.querySelectorAll('[data-slide]').forEach(b => b.setAttribute('aria-current', String(Number(b.dataset.slide)===current)));
+  };
+  const sync=()=>{
+    if(timer!==null){clearInterval(timer);timer=null;}
+    if(!desktop.matches)return;
+    show(current);
+    if(!preloaded){const next=new Image();next.src=photos[1];preloaded=true;}
+    timer=setInterval(()=>show(current+1),3000);
+  };
+  controls.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    show(b.dataset.slide!==undefined?Number(b.dataset.slide):current+Number(b.dataset.step));
+    sync();
+  }));
+  desktop.addEventListener('change',sync);
+  sync();
 })();
 </script>
 </body></html>
