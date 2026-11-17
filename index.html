@@ -101,12 +101,73 @@ body{overflow-wrap:break-word}
 
 .packaging-guide-link{font-size:13px;line-height:1.8;color:var(--muted);margin-top:18px}
 .packaging-guide-link a{font-weight:800;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+/* 2026 responsive site redesign; preserves existing hero carousel and blog sync */
+:root{--ink:#15212c;--muted:#67717c;--paper:#fff;--line:#e1e6ec;--lime:#bfe8ff;--accent:#168cc8}
+body{background:#fff}.wrap{width:min(1200px,calc(100% - 44px))}
+.nav{min-height:78px;padding:14px 0;border-bottom-color:#edf0f3;gap:24px}
+.brand{font-size:23px;line-height:1.15}.brand small{color:#526476}
+.navlinks{align-items:center;gap:25px}.navlinks a{font-size:13px}.navlinks .nav-quote{background:#168cc8;color:#fff;border-radius:24px;padding:11px 20px;white-space:nowrap}
+.mobile-menu-toggle{display:none}
+.hero{padding:56px 0 54px;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.hero .eyebrow{color:var(--accent)}.hero h1{font-size:clamp(44px,5.3vw,70px);margin:15px 0 14px}
+.hero p{font-size:18px;color:#303e4c;margin:0}.btn{border-radius:9px;border-color:#223b53;min-height:47px}
+.btn.dark{background:#168cc8;border-color:#168cc8}.visual{border-radius:12px;min-height:390px}
+.visual.ig-ready{border-radius:12px}.ig-slider{height:390px}.ig-source{background:rgba(21,33,44,.76)}
+.ig-arrow:hover{background:#bfe8ff}.ig-dot[aria-current="true"]{background:#168cc8}
+.strip{background:#eff7fc;color:#43748b}.section{padding:64px 0}.section h2{font-size:clamp(30px,3vw,39px);letter-spacing:-1.3px}.section-head{margin-bottom:22px}
+.section-head .eyebrow{color:var(--accent)}.section-head p{font-size:13px}
+.industry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.industry-card{min-width:0;display:block;overflow:hidden;border-radius:12px;background:#fff;border:1px solid #e3e9ef;box-shadow:0 2px 8px rgba(14,34,55,.035);transition:transform .2s,box-shadow .2s}
+.industry-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(20,60,100,.10)}
+.industry-visual{height:170px;display:grid;place-items:center;position:relative;overflow:hidden}
+.industry-fashion{background:linear-gradient(135deg,#dde9f4,#f2f6f9 60%,#e0edf8)}
+.industry-medical{background:linear-gradient(130deg,#d5e6f2,#f3f8fb 70%,#d5e8f5)}
+.industry-public{background:linear-gradient(130deg,#e4e9f0,#f6f7f9 60%,#dceaf2)}
+.industry-visual:before,.industry-visual:after{content:"";position:absolute;width:175px;height:175px;border:1px solid rgba(58,122,161,.15);border-radius:20px;transform:rotate(28deg)}
+.industry-visual:before{left:-110px;top:-95px}.industry-visual:after{right:-110px;bottom:-100px}
+.industry-icon{width:74px;height:74px;color:#12699b;stroke-width:1.15;z-index:1}
+.industry-caption{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:19px 18px}
+.industry-caption strong,.industry-caption small{display:block}.industry-caption strong{font-size:19px}.industry-caption small{font-size:12px;color:var(--muted);margin-top:3px}
+.arrow-icon{width:24px;height:24px;padding:4px;border:1px solid #d5e0e8;border-radius:50%;flex:none}
+.value-row{margin-top:22px;padding:20px 22px;border-radius:11px;background:#eaf5fc;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.value-item{display:flex;align-items:center;gap:13px;min-width:0}.value-item:not(:first-child){border-left:1px solid #cfdfea;padding-left:16px}
+.value-item .line-icon{flex:none;color:#12699b;width:31px;height:31px}.value-item strong,.value-item small{display:block}.value-item strong{font-size:15px;white-space:nowrap}.value-item small{font-size:11px;color:#546778}
+.portfolio-section{padding-top:18px}.portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.portfolio-tile{display:flex;flex-direction:column;gap:4px;min-width:0}.portfolio-placeholder{height:184px;border-radius:11px;background:linear-gradient(140deg,#edf4f9,#dae8f2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#5586a5}
+.portfolio-placeholder svg{width:44px;height:44px}.portfolio-placeholder span{font-size:11px;font-weight:800;letter-spacing:2px}.portfolio-tile strong{font-size:16px;margin-top:9px}.portfolio-tile small{color:var(--muted);font-size:12px}
+.journal-section{padding-top:23px}.journal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.journal-card{min-height:130px;border:1px solid #dfe7ef;border-radius:11px;padding:22px;background:#fff;display:flex;flex-direction:column;gap:6px}
+.journal-card:hover{border-color:var(--accent)}.journal-card strong{font-size:19px}.journal-card>span:last-child{font-size:12px;color:#4c7186;margin-top:auto}.journal-index{font-size:10px;letter-spacing:1.2px;color:var(--accent);font-weight:800}
+.journal-pending{background:#f2f8fb}.section-bottom{margin-top:17px;text-align:right;font-size:13px;font-weight:750}
+.darksection{background:#15212c}.step b{color:#bfe8ff}.contact{background:#e7f4fc}.formbox{border-radius:12px}.formbox .btn{background:#168cc8;border-color:#168cc8}.footer{background:#15212c}
+.blog-section .blog-posts{grid-template-columns:repeat(3,minmax(0,1fr))}.blog-post{border-radius:10px;overflow:hidden}.blog-cover{height:155px}
+@media(max-width:980px){.navlinks{gap:12px}.navlinks .nav-quote{padding:10px}.value-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.value-item:nth-child(3){border-left:0;padding-left:0}}
+@media(max-width:760px){
+.wrap{width:calc(100% - 32px)}.nav{position:relative;flex-wrap:nowrap;min-height:72px;padding:13px 0;gap:12px}
+.brand{font-size:20px;flex:1 1 auto}.brand small{font-size:8px;letter-spacing:1.5px}
+.mobile-menu-toggle{display:flex;width:42px;height:42px;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:#fff;border:1px solid #e3e9ef;border-radius:9px;cursor:pointer}
+.mobile-menu-toggle span{height:2px;width:20px;background:#263c4e;border-radius:2px}
+.navlinks{position:absolute;top:calc(100% + 2px);left:0;right:0;z-index:40;display:none;overflow:visible;width:auto;white-space:normal;background:#fff;box-shadow:0 12px 20px #172f4a1a;border:1px solid #e3e9ef;border-radius:10px;padding:13px;flex-direction:column;align-items:stretch;gap:0}
+.navlinks.is-open{display:flex}.navlinks a{padding:10px 12px;font-size:14px}.navlinks .nav-quote{text-align:center;margin-top:6px}
+.hero{display:flex;flex-direction:column;align-items:stretch;padding:34px 0 30px;gap:25px}
+.hero h1{font-size:clamp(36px,9.2vw,48px);margin:11px 0}.hero p{font-size:15px}.actions{margin-top:23px}
+.actions .btn{font-size:13px;flex:1;white-space:nowrap}
+.visual,.visual.ig-ready{min-height:0;border-radius:12px}.ig-slider{height:clamp(250px,75vw,350px)}.strip{font-size:10px}
+.section{padding:50px 0}.section-head p{margin-top:9px}.industry-grid{grid-template-columns:1fr;gap:10px}
+.industry-card{display:grid;grid-template-columns:112px minmax(0,1fr);align-items:stretch}
+.industry-visual{height:99px}.industry-icon{width:44px;height:44px}.industry-caption{padding:12px}.industry-caption strong{font-size:16px}.industry-caption small{font-size:11px}
+.value-row{margin-top:16px;padding:17px 12px;column-gap:5px;row-gap:17px}.value-item{gap:8px}.value-item:nth-child(2){border-left:1px solid #cfdfea;padding-left:11px}.value-item:nth-child(4){border-left:1px solid #cfdfea;padding-left:11px}.value-item .line-icon{width:25px;height:25px}.value-item strong{font-size:12px;white-space:normal}.value-item small{font-size:10px}
+.portfolio-section{padding-top:0}.portfolio-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.portfolio-placeholder{height:93px}.portfolio-placeholder svg{width:29px;height:29px}.portfolio-placeholder span{font-size:9px;letter-spacing:0}.portfolio-tile strong{font-size:12px;line-height:1.3}.portfolio-tile small{font-size:10px}
+.journal-grid{grid-template-columns:1fr;gap:11px}.journal-card{min-height:106px;padding:17px}.journal-card strong{font-size:17px}
+.blog-section .blog-posts{grid-template-columns:1fr}.blog-cover{height:170px}.contactgrid{grid-template-columns:1fr}
+}
+@media(max-width:360px){.actions .btn{font-size:12px;padding:11px 8px}.industry-card{grid-template-columns:94px 1fr}}
 </style>
 <meta name="google-site-verification" content="JAUnOoTRpaMYYaCgUPmKnvIZRqEFL4G1hkqJhHRhaAw" />
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
 </head>
 <body>
-<header class="wrap nav"><a class="brand" href="#top">청년지퍼백공장<small>APPAREL PACKAGING PARTNER</small></a><nav class="navlinks"><a href="#product">제품 안내</a><a href="#process">제작 안내</a><a href="#faq">FAQ</a><a href="http://pf.kakao.com/_mCxjJT" target="_blank" rel="noopener">카카오톡 문의 ↗</a></nav></header>
+<header class="wrap nav"><a class="brand" href="#top">청년지퍼백공장<small>APPAREL PACKAGING PARTNER</small></a><button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="메뉴 열기"><span></span><span></span><span></span></button><nav class="navlinks" id="site-menu"><a href="#product">핵심제품</a><a href="#portfolio">제작 포트폴리오</a><a href="#journal">제작저널</a><a href="#process">제작 안내</a><a class="nav-quote" href="#contact">제작 견적 문의 ↗</a></nav></header>
 <main id="top">
 <section class="wrap hero"><div><div class="eyebrow">Z I P P E R B A G _ F A C T O R Y</div><h1>청년지퍼백공장</h1><p>국내외 브랜드 지퍼폴리백 제작 파트너</p><div class="actions"><a class="btn dark" href="#contact">제작 견적 문의 ↗</a><a class="btn" href="https://www.instagram.com/zipperbag.official/" target="_blank" rel="noopener noreferrer">제품 샘플보기</a></div></div><div class="visual" aria-label="제품 사진 추후 추가 영역"><div class="photo-placeholder"><strong>PRODUCT PHOTOS</strong><span>제품 사진과 인쇄 제작 사례를<br>추후 이 영역에 추가할 예정입니다.</span></div><div class="visual-note">IMAGE AREA · 사진 추후 추가</div></div></section>
 <div class="strip"><div class="wrap"><span>DESIGNER BRANDS</span><span>DOMESTIC BRANDS</span><span>HIGH-END BRANDS</span><span>GOVERNMENT AGENCIES</span></div></div>
@@ -120,7 +181,22 @@ body{overflow-wrap:break-word}
   </div>
   <a class="blog-all" href="https://blog.naver.com/zipperbagnet" target="_blank" rel="noopener noreferrer">네이버 블로그 전체 글 보기 ↗</a>
 </section>
-<section class="wrap section" id="product"><div class="section-head"><div><div class="eyebrow">02 / WHAT WE MAKE</div><h2>브랜드 지퍼백<br>인쇄·제작</h2></div><p>의류 지퍼백 제작과 지퍼백 인쇄를 고민 중이라면 상품에 맞는 규격과 브랜드 로고 인쇄부터 확인해 보세요.</p></div><div class="cards"><article class="card"><div class="num">01 — CUSTOM PRINT</div><h3>브랜드 디자인 로고 인쇄</h3><p>브랜드 로고를 넣는 지퍼백 인쇄·폴리백 인쇄를 상담합니다.</p></article><article class="card"><div class="num">02 — BRAND CHANNEL</div><h3>자사몰·SNS 정보</h3><p>자사몰 주소나 인스타그램 계정 등 브랜드에 필요한 정보를 함께 구성할 수 있습니다.</p></article><article class="card"><div class="num">03 — SIZE & QUANTITY</div><h3>사이즈와 수량 상담</h3><p>의류폴리백과 지퍼폴리백 제작 시 제품 크기, 접는 방식, 예상 사용량에 맞춰 조건을 상담합니다.</p></article></div><p class="notice">※ 실제 제작 가능 규격, 최소 수량 및 인쇄 조건은 견적 상담 시 확인해 안내합니다.</p><p class="packaging-guide-link">일반 폴리백, PE 폴리백, 의류포장지 등 다른 포장재와의 차이가 궁금하신가요? <a href="./packaging-guide.html">포장재 종류와 선택 기준 살펴보기 ↗</a></p></section>
+<section class="wrap section product-section" id="product"><div class="section-head"><div><div class="eyebrow">OUR PRODUCTS</div><h2>핵심제품</h2></div></div><div class="industry-grid">
+<a class="industry-card" href="./fashion.html"><div class="industry-visual industry-fashion"><svg class="industry-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6a3 3 0 0 1 6 0c0 1.7-3 2.1-3 4"/><path d="m12 10 9 7.5a1.7 1.7 0 0 1-1.1 3H4.1a1.7 1.7 0 0 1-1.1-3L12 10Z"/></svg></div><div class="industry-caption"><span><strong>패션업계</strong><small>의류 브랜드 및 온라인 쇼핑몰</small></span><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div></a>
+<a class="industry-card" href="./medical.html"><div class="industry-visual industry-medical"><svg class="industry-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg></div><div class="industry-caption"><span><strong>의료업계</strong><small>병원 · 요양병원 · 한의원</small></span><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div></a>
+<a class="industry-card" href="./industry.html"><div class="industry-visual industry-public"><svg class="industry-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-6 9 6v12H3Z"/><path d="M3 10h18M7 14v4m5-4v4m5-4v4"/></svg></div><div class="industry-caption"><span><strong>기타 산업군</strong><small>정부기관 및 기타 비식품 산업</small></span><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></div></a>
+</div><div class="value-row" aria-label="제작 안내">
+<div class="value-item"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg><span><strong>맞춤 제작</strong><small>사이즈와 수량 상담</small></span></div>
+<div class="value-item"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9l4-6Z"/><path d="M2 9h20M6 3l6 18 6-18"/></svg><span><strong>로고 인쇄</strong><small>브랜드 디자인 인쇄 상담</small></span></div>
+<div class="value-item"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 22 7-4V6l-7-4-7 4v12l7 4Z"/><path d="m8 12 3 3 5-6"/></svg><span><strong>인쇄 품질 확인</strong><small>제작 조건별 사전 점검</small></span></div>
+<div class="value-item"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="2" y="13" width="4" height="7" rx="2"/><rect x="18" y="13" width="4" height="7" rx="2"/><path d="M20 20c-1 2-3 3-6 3h-2"/></svg><span><strong>제작 상담</strong><small>문의부터 납품까지 안내</small></span></div></div>
+<p class="packaging-guide-link">포장재 종류별 선택 기준이 궁금하신가요? <a href="./packaging-guide.html">의류 포장재 가이드 보기 ↗</a></p></section>
+<section class="wrap section portfolio-section" id="portfolio"><div class="section-head"><div><div class="eyebrow">PORTFOLIO</div><h2>제작 포트폴리오</h2></div><p>산업군별 제작 사례를 확인하세요.</p></div><div class="portfolio-grid">
+<a href="./fashion.html" class="portfolio-tile"><div class="portfolio-placeholder"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6a3 3 0 0 1 6 0c0 1.7-3 2.1-3 4"/><path d="m12 10 9 7.5a1.7 1.7 0 0 1-1.1 3H4.1a1.7 1.7 0 0 1-1.1-3L12 10Z"/></svg><span>FASHION</span></div><strong>패션업계 제작 사례</strong><small>포트폴리오 준비 중</small></a>
+<a href="./medical.html" class="portfolio-tile"><div class="portfolio-placeholder"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/></svg><span>MEDICAL</span></div><strong>의료업계 제작 사례</strong><small>포트폴리오 준비 중</small></a>
+<a href="./industry.html" class="portfolio-tile"><div class="portfolio-placeholder"><svg class="line-icon" xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-6 9 6v12H3Z"/><path d="M3 10h18M7 14v4m5-4v4m5-4v4"/></svg><span>INDUSTRY</span></div><strong>기타 산업군 제작 사례</strong><small>포트폴리오 준비 중</small></a>
+</div></section>
+<section class="wrap section journal-section" id="journal"><div class="section-head"><div><div class="eyebrow">PACKAGING JOURNAL</div><h2>제작저널</h2></div><p>지퍼폴리백 제작과 포장재 선택에 관한 전문 정보.</p></div><div class="journal-grid"><a class="journal-card" href="./packaging-guide.html"><span class="journal-index">01 / PACKAGING GUIDE</span><strong>의류 포장재 종류와 선택 기준</strong><span>자세히 보기 →</span></a><a class="journal-card journal-pending" href="./journal.html"><span class="journal-index">02 / PACKAGING JOURNAL</span><strong>새로운 제작저널</strong><span>목록 보기 →</span></a></div><div class="section-bottom"><a href="./journal.html">제작저널 전체 보기 →</a></div></section>
 <section class="darksection" id="process"><div class="wrap section"><div class="section-head"><div><div class="eyebrow">03 / HOW IT WORKS</div><h2>문의부터 제작까지,<br>순서대로 안내합니다.</h2></div><p>처음 제작하는 경우에도 필요한 정보를 하나씩 확인할 수 있도록 상담을 진행합니다.</p></div><div class="steps"><div class="step"><b>STEP 01</b><h3>제작 조건 전달</h3><p>사이즈, 수량, 인쇄 내용을 알려주세요.</p></div><div class="step"><b>STEP 02</b><h3>견적 확인</h3><p>전달받은 조건을 기준으로 견적을 확인합니다.</p></div><div class="step"><b>STEP 03</b><h3>시안·제작 상담</h3><p>인쇄 내용과 진행 조건을 확인합니다.</p></div><div class="step"><b>STEP 04</b><h3>제작 진행</h3><p>확정된 조건에 따라 제작을 진행합니다.</p></div></div></div></section>
 
 
@@ -337,6 +413,23 @@ body{overflow-wrap:break-word}
       start();
     })
     .catch(() => { /* Preserve the original placeholder when data is unavailable. */ });
+})();
+</script>
+<script>
+(() => {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  const menu = document.querySelector('#site-menu');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  });
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => {
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '메뉴 열기');
+  }));
 })();
 </script>
 </body></html>
