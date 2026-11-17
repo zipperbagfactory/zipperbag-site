@@ -16,7 +16,7 @@
     if (!link) return;
     var href = link.getAttribute('href') || '';
     var isContactSection = href === '#contact' || href === './#contact' || href === '/#contact';
-    var isKakaoQuote = /^https?:\\/\\/pf\\.kakao\\.com\\/_mCxjJT(?:[\\/?#]|$)/i.test(href);
+    var isKakaoQuote = href.indexOf('pf.kakao.com/_mCxjJT') !== -1;
     if (!isContactSection && !isKakaoQuote) return;
     gtag('event', isKakaoQuote ? 'kakao_quote_click' : 'quote_click', {
       link_text: (link.textContent || '').trim().slice(0, 80),
