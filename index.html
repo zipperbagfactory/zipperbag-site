@@ -8,6 +8,22 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TXR2C9EYRY');
+
+  // 견적 문의 진입과 카카오톡 채널 이동을 각각 별도 이벤트로 측정합니다.
+  document.addEventListener('click', function(event) {
+    var target = event.target;
+    var link = target && target.closest ? target.closest('a[href]') : null;
+    if (!link) return;
+    var href = link.getAttribute('href') || '';
+    var isContactSection = href === '#contact' || href === './#contact' || href === '/#contact';
+    var isKakaoQuote = /^https?:\\/\\/pf\\.kakao\\.com\\/_mCxjJT(?:[\\/?#]|$)/i.test(href);
+    if (!isContactSection && !isKakaoQuote) return;
+    gtag('event', isKakaoQuote ? 'kakao_quote_click' : 'quote_click', {
+      link_text: (link.textContent || '').trim().slice(0, 80),
+      page_path: window.location.pathname,
+      link_url: href
+    });
+  });
 </script>
 
 <meta name="msvalidate.01" content="593B1D692F8E07958CF16C55C9CD63CB" />
