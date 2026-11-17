@@ -224,6 +224,17 @@ main>.hero.wrap .ig-dot:focus-visible{outline:2px solid #086d9a}
  .pc-hero-dot[aria-current="true"]{background:#168cc8}
  .pc-hero-controls button:focus-visible{outline:2px solid #086d9a;outline-offset:3px}
 }
+
+/* Desktop-only AI illustration slideshow; mobile retains the original product photo slider. */
+@media(min-width:761px){
+ main>.hero.wrap .visual.ai-desktop-ready .ig-slider{display:none}
+ main>.hero.wrap .visual.ai-desktop-ready .ai-desktop-slider{display:block}
+ .ai-desktop-slider{position:absolute;inset:0;overflow:hidden}
+ .ai-desktop-frame{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+ .ai-desktop-frame.is-active{opacity:1}
+ .ai-desktop-disclosure{position:absolute;right:17px;bottom:13px;z-index:2;font-size:9px;color:#fff;background:rgba(12,35,50,.44);padding:4px 7px;border-radius:4px;letter-spacing:.1px}
+}
+.ai-desktop-slider{display:none}
 </style>
 <meta name="google-site-verification" content="JAUnOoTRpaMYYaCgUPmKnvIZRqEFL4G1hkqJhHRhaAw" />
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
@@ -521,6 +532,46 @@ main>.hero.wrap .ig-dot:focus-visible{outline:2px solid #086d9a}
   }));
   desktop.addEventListener('change',sync);
   sync();
+})();
+</script>
+<script>
+/* The two desktop images are optional until uploaded; missing images leave the original slideshow untouched. */
+(() => {
+  const visual = document.querySelector('.hero .visual');
+  if (!visual) return;
+  const sources = ['./hero_factory_final.jpg','./hero_rolls_final.jpg'];
+  const verify = (src) => new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+  Promise.all(sources.map(verify)).then((ready) => {
+    if (!ready.every(Boolean)) return;
+    const slider = document.createElement('div');
+    slider.className = 'ai-desktop-slider';
+    slider.setAttribute('aria-label','AI로 재구성한 공장 내부와 원단 롤 이미지');
+    const frames = sources.map((src, index) => {
+      const frame = document.createElement('div');
+      frame.className = 'ai-desktop-frame' + (index === 0 ? ' is-active' : '');
+      frame.style.backgroundImage = 'url("' + src + '")';
+      slider.append(frame);
+      return frame;
+    });
+    const disclosure = document.createElement('span');
+    disclosure.className = 'ai-desktop-disclosure';
+    disclosure.textContent = 'AI로 재구성한 이미지';
+    slider.append(disclosure);
+    visual.append(slider);
+    visual.classList.add('ai-desktop-ready');
+    let current = 0;
+    setInterval(() => {
+      if (document.hidden || window.matchMedia('(max-width:760px)').matches) return;
+      frames[current].classList.remove('is-active');
+      current = (current + 1) % frames.length;
+      frames[current].classList.add('is-active');
+    }, 3000);
+  });
 })();
 </script>
 </body></html>
