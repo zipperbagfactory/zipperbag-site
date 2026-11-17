@@ -6,6 +6,22 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-TXR2C9EYRY');
+
+  // 견적 문의 진입과 카카오톡 채널 이동을 각각 별도 이벤트로 측정합니다.
+  document.addEventListener('click', function(event) {
+    var target = event.target;
+    var link = target && target.closest ? target.closest('a[href]') : null;
+    if (!link) return;
+    var href = link.getAttribute('href') || '';
+    var isContactSection = href === '#contact' || href === './#contact' || href === '/#contact';
+    var isKakaoQuote = /^https?:\\/\\/pf\\.kakao\\.com\\/_mCxjJT(?:[\\/?#]|$)/i.test(href);
+    if (!isContactSection && !isKakaoQuote) return;
+    gtag('event', isKakaoQuote ? 'kakao_quote_click' : 'quote_click', {
+      link_text: (link.textContent || '').trim().slice(0, 80),
+      page_path: window.location.pathname,
+      link_url: href
+    });
+  });
 </script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="의류 브랜드와 쇼핑몰을 위한 의류지퍼백·의류폴리백 제작 사례. 실제 사진으로 PE 지퍼백 사이즈, 두께, 로고 동판인쇄, 타공 및 제작 수량을 확인하세요."><title>의류지퍼백·의류폴리백 제작 사례 | 청년지퍼백공장</title><link rel="canonical" href="https://www.zipperbag.net/fashion.html"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css"><style>:root{--ink:#15212c;--blue:#168cc8;--line:#dfe8f0}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.6 "Pretendard Variable",Pretendard,"Malgun Gothic",sans-serif;background:#fff}a{color:inherit;text-decoration:none}.wrap{width:min(1100px,calc(100% - 36px));margin:auto}.top{border-bottom:1px solid var(--line)}.top .wrap{display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:12px}.brand{font-weight:900;font-size:19px;letter-spacing:-.5px}.nav{display:flex;align-items:center;gap:19px;font-size:13px;font-weight:750}.nav a:hover{color:var(--blue)}.quote{color:#fff;background:var(--blue);padding:9px 17px;border-radius:24px}.breadcrumb{font-size:12px;color:#647787;margin-top:45px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.7px;color:var(--blue)}h1{font-size:clamp(35px,5vw,54px);line-height:1.15;letter-spacing:-1.8px;margin:14px 0}h2{font-size:27px;margin:0 0 10px}.lead{max-width:650px;color:#576a79}.hero{padding:35px 0 42px;border-bottom:1px solid var(--line)}.gallery{padding:56px 0 85px}.empty{border:1px dashed #a9c5d7;border-radius:14px;background:#eff7fc;padding:65px 22px;text-align:center;margin-top:24px}.empty strong{display:block;font-size:21px}.empty p{color:#536d80;margin:6px auto 23px;max-width:510px;font-size:14px}.button{background:var(--blue);color:white;border-radius:8px;display:inline-block;padding:12px 20px;font-size:13px;font-weight:800}.back{display:inline-block;margin-top:18px;font-weight:700;font-size:13px;color:#326b8e}.info{padding:26px 30px;background:#f3f7fa;border-radius:12px;margin-top:24px}.info h3{margin:0 0 8px}.info p{margin:0;color:#506372;font-size:14px}.foot{background:var(--ink);color:#fff;padding:25px 0;font-size:12px}@media(max-width:640px){.top .wrap{flex-wrap:wrap}.nav{gap:12px;flex-wrap:wrap}.nav .quote{padding:7px 11px}.breadcrumb{margin-top:27px}.hero{padding:20px 0 30px}.gallery{padding:35px 0 55px}.empty{padding:47px 16px}.info{padding:19px}}
 /* Fashion portfolio case study — editorial layout */
