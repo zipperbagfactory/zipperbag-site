@@ -289,7 +289,46 @@ main>.hero.wrap p{
 .product-section .fashion-banner-footer{position:absolute;left:6.7%;top:74%;font-size:1.62cqw;font-weight:400;letter-spacing:-.03em;white-space:nowrap}
 .product-section .fashion-banner-footer strong{display:block;margin-top:5%;font-size:2.65cqw;font-weight:800;letter-spacing:-.04em}
 @media(max-width:760px){.product-section .industry-card{display:block}.product-section .industry-visual{height:auto;aspect-ratio:1672 / 941}.product-section .industry-caption{padding:13px 14px}.product-section .fashion-banner-rule{height:1px}}
-.product-seo-bottom{padding:30px 0 34px;border-top:1px solid var(--line)}.product-seo-intro{max-width:850px;margin:0;color:#687077}.product-seo-intro h2{margin:0 0 10px;font-size:17px;font-weight:750;letter-spacing:-.025em;color:#495159}.product-seo-intro p{font-size:13px;line-height:1.85;margin:0 0 5px;word-break:keep-all}.product-seo-intro a{text-decoration:underline;text-underline-offset:3px}@media(max-width:640px){.product-seo-bottom{padding:24px 0}.product-seo-intro h2{font-size:16px}.product-seo-intro p{font-size:12px}}</style>
+.product-seo-bottom{padding:30px 0 34px;border-top:1px solid var(--line)}.product-seo-intro{max-width:850px;margin:0;color:#687077}.product-seo-intro h2{margin:0 0 10px;font-size:17px;font-weight:750;letter-spacing:-.025em;color:#495159}.product-seo-intro p{font-size:13px;line-height:1.85;margin:0 0 5px;word-break:keep-all}.product-seo-intro a{text-decoration:underline;text-underline-offset:3px}@media(max-width:640px){.product-seo-bottom{padding:24px 0}.product-seo-intro h2{font-size:16px}.product-seo-intro p{font-size:12px}}
+/* Mobile parity: display the same illustrated hero slideshow as desktop.
+   Keep captions and both product banners fully visible at narrow widths. */
+@media(max-width:760px){
+  main>.hero.wrap .visual{display:none}
+  main>.hero.wrap .pc-hero-slide{
+    display:block;position:relative;inset:auto;width:100%;
+    height:clamp(240px,68vw,380px);object-fit:cover;
+    object-position:62% center;z-index:0
+  }
+  main>.hero.wrap .pc-hero-controls{
+    display:flex;position:absolute;left:50%;bottom:13px;
+    transform:translateX(-50%);z-index:5;align-items:center;gap:9px
+  }
+  .pc-hero-arrow{
+    display:grid;place-items:center;border:0;width:34px;height:34px;
+    border-radius:50%;background:rgba(255,255,255,.93);
+    color:#25485e;font-size:19px;cursor:pointer
+  }
+  .pc-hero-dot{
+    width:9px;height:9px;border:0;border-radius:50%;
+    background:#6e8396;cursor:pointer;padding:0
+  }
+  .pc-hero-dot[aria-current="true"]{background:#168cc8}
+  .pc-hero-controls button:focus-visible{outline:2px solid #086d9a;outline-offset:3px}
+  main>.hero.wrap .pc-hero-ai{
+    display:block;position:absolute;right:9px;bottom:8px;z-index:4;
+    padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.83);
+    color:#44515b;font-size:9px
+  }
+  .product-section .industry-grid{grid-template-columns:minmax(0,1fr)}
+  .product-section .industry-visual{height:auto;aspect-ratio:16 / 9}
+  .product-section .industry-fashion-photo,
+  .product-section .industry-public-photo{
+    display:block;width:100%;height:100%;object-fit:contain;object-position:center
+  }
+  .product-section .industry-caption strong{font-size:clamp(13px,3.7vw,16px);line-height:1.4}
+  .product-section .industry-caption small{font-size:11px;line-height:1.5}
+}
+</style>
 <meta name="google-site-verification" content="JAUnOoTRpaMYYaCgUPmKnvIZRqEFL4G1hkqJhHRhaAw" />
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"청년지퍼백공장","url":"https://www.zipperbag.net/","description":"브랜드와 쇼핑몰을 위한 PE 지퍼백 제작·인쇄 및 맞춤형 지퍼폴리백 제작 상담","sameAs":["https://blog.naver.com/zipperbagnet","https://www.instagram.com/zipperbag.official/"]}</script>
@@ -571,7 +610,6 @@ main>.hero.wrap p{
   const image = document.querySelector('.pc-hero-slide');
   const controls = document.querySelector('.pc-hero-controls');
   if (!image || !controls) return;
-  const desktop = window.matchMedia('(min-width: 761px)');
   const photos = ['./hero-images/factory.png','./hero-images/rolls.png'];
   let current=0, timer=null, preloaded=false;
   const show = (n) => {
@@ -582,7 +620,6 @@ main>.hero.wrap p{
   };
   const sync=()=>{
     if(timer!==null){clearInterval(timer);timer=null;}
-    if(!desktop.matches)return;
     show(current);
     if(!preloaded){const next=new Image();next.src=photos[1];preloaded=true;}
     timer=setInterval(()=>show(current+1),3000);
@@ -591,7 +628,6 @@ main>.hero.wrap p{
     show(b.dataset.slide!==undefined?Number(b.dataset.slide):current+Number(b.dataset.step));
     sync();
   }));
-  desktop.addEventListener('change',sync);
   sync();
 })();
 </script>
